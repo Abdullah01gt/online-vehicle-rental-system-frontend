@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Navbar() {
+export default function Navbar( {panelSwitching}) {
   return (
    
        <nav className="border-b border-gray-800/60 bg-[#12141c]/90 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
@@ -13,7 +13,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center space-x-4">
-                <button onclick="toggleDashboard()" className="flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition duration-200 text-gray-200">
+                <button onClick={() => panelSwitching()} className="flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2 rounded-xl text-sm font-medium transition duration-200 text-gray-200">
                     <i data-lucide="folder-heart" className="w-4 h-4 text-amber-500"></i>
                     <span>My Bookings</span>
                     <span className="bg-amber-500/10 text-amber-400 text-xs px-2 py-0.5 rounded-full border border-amber-500/20">3</span>
