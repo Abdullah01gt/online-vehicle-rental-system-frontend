@@ -37,8 +37,14 @@ export default function VehicleCard( {cars={}, currentUser={}}) {
             const newBooking = {
             user_id: currentUser._id,
             vehicle_id: cars._id,
+            vehicle_name: cars.brand_name,
+            vehicle_model:cars.model_name,
+            vehicle_year: cars.model_year,
+            vehicle_type:cars.vehicle_type,
+            vehicle_number: cars.registration_number,
             booking_start: fromDate,
-            booking_end: returnDate
+            booking_end: returnDate,
+
         }
         console.log(newBooking)
         const response = await fetch("http://localhost:3000/bookings/v1/create",
