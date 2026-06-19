@@ -26,12 +26,12 @@ export default function Home() {
   },[])
 
   useEffect(() => {
-    fetch("http://localhost:3000/bookings/v1/",{
+    fetch("http://localhost:3000/bookings/v1/booking",{
         method:"POST",
         header:{
             "content-type": "application/json"
         },
-        body:JSON.stringify({user_id:currentUser._id})
+        body:JSON.stringify({user_id: userDetails._id})
     })
     .then((response) => response.json())
     .then((result) =>{

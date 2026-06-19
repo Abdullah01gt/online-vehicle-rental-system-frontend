@@ -46,6 +46,7 @@ export default function VehicleCard( {cars={}, currentUser={}}) {
             booking_end: returnDate,
 
         }
+        console.log(cars)
         console.log(newBooking)
         const response = await fetch("http://localhost:3000/bookings/v1/create",
             {

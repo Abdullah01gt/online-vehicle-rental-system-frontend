@@ -5,7 +5,7 @@ import { useNavigate, Link } from 'react-router';
 
 
 
-export default function Login() {
+export default function AdminLogin() {
 
   const [emailAddress, setEmailAddress] = useState("")   
   const [password, setPassword] = useState("")
@@ -57,14 +57,14 @@ export default function Login() {
       }
 
       const validation = await checkValidation(credentials)
-      if(validation){
+      if(validation.data[0].user_role == "admin"){
         console.log(validation.data[0])
         console.log(validation.token)
         login(validation.data[0], validation.token);
         
-        navigate('/')
+        navigate('/admin')
       }else{
-        navigate("/login");
+        navigate("/adminlogin");
         setWrongCredentials(true)
       }
 
@@ -114,8 +114,8 @@ export default function Login() {
             </div>
 
             <div className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Welcome Back</h2>
-                <p className="text-gray-400 text-sm mt-2">Enter your credentials to access your booking dashboard.</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Admin Login</h2>
+                <p className="text-gray-400 text-sm mt-2">If you're an admin, Please enter your credentials here.</p>
             </div>
 
       
@@ -168,19 +168,13 @@ export default function Login() {
             </form>
 
             <p className="text-center text-sm text-gray-400 mt-8">
-                Don't have an account? 
-               
-                <Link to="/signup"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                Create an account
+                Not an admin? To login as an user
+                {/* <a href="#" className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
+                    Create an account
+                </a> */}
+                <Link to="/login"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
+                click here
                 </Link>
-                
-            </p>
-             <p className="text-center text-sm text-gray-400 mt-8">
-                Login as an <t />
-                <Link to="/adminlogin"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                admin
-                </Link>
-                
             </p>
         </div>
     </div>
