@@ -1,16 +1,37 @@
-# React + Vite
+# Quick Drive 
+## The Vehicle Rental platform to make your journey luxurious
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
 
-Currently, two official plugins are available:
+Quick Drive  is an online Vehicle Rental platform on which you can Rent vehicles on a day basis.
+You can book vehiceles for rent , Our Online Platform features a wide variety of vehicles ranging from sedans
+to traveller vans . You can book vehicles depending your journey , We only charge based on per day basis
+you can book for a day and cover as many distance as you wish. Fares are transparent and each vehicles are guarenteed to have 
+A/C and basic infotainment systems.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Roles
 
-## React Compiler
+###  1. User
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Can book vehicles
+- View their past Transactions
+- Change their Profiles
+- View, Cancel or Modify Bookings
 
-## Expanding the ESLint configuration
+### 2. Vehicle Owners
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Can registers vehicles Their vehicles for renting
+- View who booked thier vehicles
+- Can Make their vehicles available or unavailable for bookings
+
+### 3. Admins
+
+- Can Monitor bookings and payments
+- Can approve New Vehicles available for rentals
+- Manage All The user profiles
+
+## Tech Stacks Used
+
+- FrontEnd - React, Vite, HTML ,CSS and JavaScript
+- BackEnd - Node and Express  
+- Database - Mongo DB
