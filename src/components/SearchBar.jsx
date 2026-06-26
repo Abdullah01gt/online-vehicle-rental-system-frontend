@@ -1,63 +1,58 @@
-import React from 'react'
 
-export default function SearchBar() {
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
+const serverBaseUrl = import.meta.env.VITE_SERVER_URL
+
+export default function SearchBar({ setVehicleList }) {
+  const [textInput, setTextInput] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+  async function handleSearchTrigger(e) {
+    e.preventDefault();
+    setIsSearching(true);
+
+    try {
+      const response = await fetch(`${serverBaseUrl}/vehicles/v1/search`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({ searchQuery: textInput })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Overwrite the home vehicle matrix state list with our filtered search arrays!
+        setVehicleList(result.data);
+      }
+    } catch (error) {
+      console.error("Search fetch loop failed:", error);
+    } finally {
+      setIsSearching(false);
+    }
+  }
+
   return (
-     <section className="max-w-7xl mx-auto px-6 mb-12">
-        <div className="bg-[#12141c] border border-gray-800/80 rounded-2xl p-4 sm:p-6 shadow-xl">
-            <form className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end" onsubmit="event.preventDefault();">
-                
-                <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                        <i data-lucide="map-pin" className="w-3.5 h-3.5 text-amber-500"></i> Location
-                    </label>
-                    <div className="relative">
-                        <input type="text" placeholder="e.g. Beverly Hills, CA" 
-                               className="w-full pl-4 pr-4 py-3 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition" />
-                    </div>
-                </div>
-
-                <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                        <i data-lucide="layers" className="w-3.5 h-3.5 text-amber-500"></i> Vehicle Type
-                    </label>
-                    <div className="relative">
-                        <select className="w-full pl-4 pr-10 py-3 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition appearance-none cursor-pointer">
-                            <option value="all">All Vehicle Types</option>
-                            <option value="hypercar">Hypercar / Supercar</option>
-                            <option value="suv">Luxury SUV</option>
-                            <option value="sedan">Executive Sedan</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-gray-500">
-                            <i data-lucide="chevron-down" className="w-4 h-4"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                        <i data-lucide="dollar-sign" className="w-3.5 h-3.5 text-amber-500"></i> Max Price (Per Day)
-                    </label>
-                    <div className="relative">
-                        <select className="w-full pl-4 pr-10 py-3 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition appearance-none cursor-pointer">
-                            <option value="any">Any Price Range</option>
-                            <option value="300">Under $300 / day</option>
-                            <option value="600">Under $600 / day</option>
-                            <option value="1200">Under $1,200 / day</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-gray-500">
-                            <i data-lucide="chevron-down" className="w-4 h-4"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <button type="submit" className="w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold py-3 px-4 rounded-xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition duration-200 flex items-center justify-center space-x-2">
-                        <i data-lucide="sliders-horizontal" className="w-4 h-4"></i>
-                        <span>Apply Filters</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
-  )
+    <div className="max-w-3xl mx-auto px-6 my-8">
+      <form onSubmit={handleSearchTrigger} className="relative flex items-center">
+        <input
+          type="text"
+          value={textInput}
+          onChange={(e) => setTextInput(e.target.value)}
+          placeholder="Search by brand, model, year, or location (e.g., Toyota, SUV, 2026)..."
+          className="w-full px-5 py-3.5 pl-12 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-amber-500 transition-all duration-200"
+        />
+        <Search className="absolute left-4 w-5 h-5 text-gray-500" />
+        
+        <button
+          type="submit"
+          disabled={isSearching}
+          className="absolute right-2 px-4 py-2 bg-amber-500 hover:bg-amber-400 disabled:bg-amber-500/50 text-black font-bold text-xs rounded-lg transition"
+        >
+          {isSearching ? "Filtering..." : "Search"}
+        </button>
+      </form>
+    </div>
+  );
 }

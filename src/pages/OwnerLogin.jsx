@@ -6,7 +6,7 @@ const serverBaseUrl = import.meta.env.VITE_SERVER_URL
 
 
 
-export default function Login() {
+export default function OwnerLogin() {
 
   const [emailAddress, setEmailAddress] = useState("")   
   const [password, setPassword] = useState("")
@@ -35,7 +35,6 @@ export default function Login() {
         }
      );
      const return_data = await response.json();
-     
      if(return_data.data.length > 0){
       
        return return_data
@@ -51,20 +50,19 @@ export default function Login() {
    async function handleSubmit(e){
     e.preventDefault()
     setWrongCredentials(false)
-   
+    
       const credentials ={
         email_address: emailAddress,
         password: password
       }
 
       const validation = await checkValidation(credentials)
-      if(validation){
-      
-        login(validation.data[0], validation.token);
+      if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "owner"){
         
-        navigate('/')
+        
+        navigate('/owner')
       }else{
-        navigate("/login");
+        navigate("/ownerlogin");
         setWrongCredentials(true)
       }
 
@@ -114,8 +112,8 @@ export default function Login() {
             </div>
 
             <div className="mb-8">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Welcome Back</h2>
-                <p className="text-gray-400 text-sm mt-2">Enter your credentials to access your booking dashboard.</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Vehicle Owner Login</h2>
+                <p className="text-gray-400 text-sm mt-2">If you're an vehicle owner, Please enter your credentials here.</p>
             </div>
 
       
@@ -154,7 +152,7 @@ export default function Login() {
                     <p className="text-red-400 text-sm"> The Username or Password That you Have Entered is incorrect, Please Try again! </p>
                 </div>}
 
-             
+                
 
                 <button type="submit" 
                         className="w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition duration-200 flex items-center justify-center space-x-2 group" onClick={handleSubmit}>
@@ -163,27 +161,20 @@ export default function Login() {
                 </button>
             </form>
 
-            <p className="text-center text-sm text-gray-400 mt-8">
-                Don't have an account? 
+              <p className="text-center text-sm text-gray-400 mt-8">
+                New Here? Register by <t />
                
-                <Link to="/signup"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                Create an account
+                <Link to="/ownersignup"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
+                clicking here
                 </Link>
-                
             </p>
-             <p className="text-center text-sm text-gray-400 mt-8">
-                Login as an <t />
-                <Link to="/adminlogin"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                admin
-                </Link>
-                
-            </p>
+
             <p className="text-center text-sm text-gray-400 mt-8">
-                Login as an <t />
-                <Link to="/ownerlogin"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                owner
+                Not an vehicle owner ? To login as an user <t />
+               
+                <Link to="/login"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
+                click here
                 </Link>
-                
             </p>
         </div>
     </div>

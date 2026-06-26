@@ -4,7 +4,7 @@ import AdminNavbar from '../components/AdminNavbar.jsx'
 import VehicleApprovalCard from '../elements/VehicleApprovalCard.jsx'
 const serverBaseUrl = import.meta.env.VITE_SERVER_URL
 
-export default function AdminHome() {
+export default function VehicleApproval() {
 
   const [vehicles, setVehicles] = useState([])
 
@@ -16,16 +16,15 @@ export default function AdminHome() {
           "content-type": "application/json"
         },
         body: JSON.stringify({
-          statuses: ["available", "maintenance"]
+          statuses: ["pending"]
         })
             
         
       }
-    )
-    .then((response) => response.json())
-    .then((result) => {setVehicles(result.data)
-      
-    })
+    ).then((response) => response.json())
+     .then((result) => {setVehicles(result.data)
+       
+     })
   },[])
 
   return (
@@ -39,10 +38,7 @@ export default function AdminHome() {
                 <p className="text-gray-400 text-xs sm:text-sm mt-1">Global tracking matrix. Instantly list or toggle deployment parameters for all registered fleet units.</p>
             </div>
           
-            <div className="bg-[#12141c] border border-gray-800/80 rounded-xl px-4 py-2 text-xs flex items-center space-x-4">
-                <div><span className="text-gray-500 block uppercase font-bold text-[10px]">Active Listing</span><span className="text-white font-bold text-lg">{vehicles.length} Units</span></div>
-                
-            </div>
+            
         </div>
     </header>
 
@@ -50,12 +46,15 @@ export default function AdminHome() {
     <main className="max-w-7xl mx-auto px-6 pb-24 mt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-          
+         
+           
          {vehicles.map((element) => (
-         <VehicleMaintainingCard  
+                     <VehicleApprovalCard 
          cars={element}
          key={element._id} />
          ))}
+
+         {vehicles.length == 0 && <p > No new vehicles has been registered yet for approval</p>}
 
         </div>
     </main>

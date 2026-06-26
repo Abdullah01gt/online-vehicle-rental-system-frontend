@@ -16,14 +16,14 @@ export default function Signup() {
     const [drivingLicenseId, setDrivingLicenseId] = useState("")
     const [address, setAddress] = useState("")
     
-  
+    
     const [errors, setErrors] = useState({})
     const [valuesUpdation, setValuesUpdation] = useState(false)
 
-  
+    
     const validateUsername = (username) => /^[A-Za-z ]{3,30}$/.test(username.trim());
     const validatePhoneNumber = (phone) => /^[6-9]\d{9}$/.test(phone.trim());
-   
+    
     const validateDL = (dl) => /^[A-Z]{2}\d{2}\s?\d{10}$/i.test(dl.trim());
     const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
 
@@ -69,7 +69,8 @@ export default function Signup() {
                 driving_license_id: drivingLicenseId.trim().toUpperCase(),
                 date_of_birth: dateOfBirth,
                 address: address.trim(),
-                contact_number: contactNumber.trim()
+                contact_number: contactNumber.trim(),
+                user_role: "owner"
             };
 
             const response = await fetch(`${serverBaseUrl}/users/v1/create`, {
@@ -109,7 +110,7 @@ export default function Signup() {
                     </div>
                 </div>
 
-               
+             
                 <div className="w-full md:w-7/12 flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-16 bg-[#12141c]">
                     <div className="mb-6">
                         <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Create Account</h2>
@@ -127,7 +128,7 @@ export default function Signup() {
                                 {errors.userName && <p className="text-red-400 text-xs mt-0.5">{errors.userName}</p>}
                             </div>
 
-                           
+                      
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Email Address</label>
                                 <input type="email" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200" 
@@ -135,7 +136,7 @@ export default function Signup() {
                                 {errors.emailAddress && <p className="text-red-400 text-xs mt-0.5">{errors.emailAddress}</p>}
                             </div>
 
-                          
+                         
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Password</label>
                                 <input type="password" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200" 
@@ -143,7 +144,7 @@ export default function Signup() {
                                 {errors.password && <p className="text-red-400 text-xs mt-0.5">{errors.password}</p>}
                             </div>
 
-                            
+                          
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Contact Number</label>
                                 <input type="tel" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200" 
@@ -151,7 +152,7 @@ export default function Signup() {
                                 {errors.contactNumber && <p className="text-red-400 text-xs mt-0.5">{errors.contactNumber}</p>}
                             </div>
 
-                          
+                    
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Date of Birth</label>
                                 <input type="date" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200" 
@@ -181,7 +182,7 @@ export default function Signup() {
                             {errors.drivingLicenseId && <p className="text-red-400 text-xs mt-0.5">{errors.drivingLicenseId}</p>}
                         </div>
 
-                      
+                     
                         <div className="space-y-1.5">
                             <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Residential Address</label>
                             <textarea rows="2" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200 resize-none" 

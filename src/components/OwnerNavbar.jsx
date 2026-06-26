@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router'
-import VehicleApproval from '../pages/VehicleApproval'
-import AdminVehicleRentalHistory from '../pages/AdminVehicleRentalHistory'
 import { useAuth } from '../context/AuthContext'
-const serverBaseUrl = import.meta.env.VITE_SERVER_URL
 
 
-
-export default function AdminNavbar() {
-    const { logout } = useAuth()
-    const [ newApprovals, setNewApprovals] = useState([])
-   
-      useEffect(() => {
-        fetch(`${serverBaseUrl}/vehicles/v1/admincontrol`,
-          {
-            method:"POST",
-            headers:{
-              "content-type": "application/json"
-            },
-            body: JSON.stringify({
-              statuses: ["pending"]
-            })
-                
-            
-          }
-        ).then((response) => response.json())
-         .then((result) => {setNewApprovals(result.data)
-            
-         })
-      },[])
+export default function OwnerNavbar() {
     const navigate = useNavigate()
+    const { logout } = useAuth()
+    
   return (
     <div>
       <nav className="border-b border-gray-800/60 bg-[#12141c]/95 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
@@ -48,36 +25,26 @@ export default function AdminNavbar() {
 
            
             <div className="flex flex-wrap items-center gap-3 w-full sm:w-auto justify-start sm:justify-end">
+                
+              
 
-                <button onClick={() => navigate("/admin")}
+          <button onClick={() => navigate("/owner")}
                         className="relative flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
                     <i data-lucide="git-pull-request" className="w-4 h-4 text-amber-500 group-hover:scale-110 transition"></i>
                     <span>Home</span>
                    
-                </button>
-                
-               <button onClick={() => navigate("/usersinfo")}
+                </button>    
+                <button onClick={() => navigate("/vehicleregistration")}
                         className="relative flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
                     <i data-lucide="git-pull-request" className="w-4 h-4 text-amber-500 group-hover:scale-110 transition"></i>
-                    <span>Users Info</span>
-                   { newApprovals.length > 0  ? <span className="bg-amber-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-md shadow-sm">{newApprovals.length} New</span> : <div></div>}
-                </button>
-                <button onClick={() => navigate("/vehicleapproval")}
-                        className="relative flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
-                    <i data-lucide="git-pull-request" className="w-4 h-4 text-amber-500 group-hover:scale-110 transition"></i>
-                    <span>Vehicle Approvals</span>
-                   { newApprovals.length > 0  ? <span className="bg-amber-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-md shadow-sm">{newApprovals.length} New</span> : <div></div>}
+                    <span>Register your Vehicle</span>
+                    
                 </button>
 
             
-                <button onClick={() => navigate("/paymentrecords")}
-                        className="flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
-                    <i data-lucide="wallet" className="w-4 h-4 text-emerald-500 group-hover:scale-110 transition"></i>
-                    <span>Payment Records</span>
-                </button>
 
               
-                <button onClick={() => navigate("/adminvehiclerentalhistory")}
+                <button onClick={() => navigate("/vehiclerentalhistory")}
                         className="flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
                     <i data-lucide="history" className="w-4 h-4 text-blue-400 group-hover:scale-110 transition"></i>
                     <span>Vehicle's Rental History</span>

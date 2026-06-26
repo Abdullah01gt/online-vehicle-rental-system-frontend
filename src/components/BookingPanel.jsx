@@ -1,7 +1,7 @@
 import React from 'react'
 import BookingCard from '../elements/BookingCard'
 
-export default function BookingPanel( {panelSwitching , userBookings=[]}) {
+export default function BookingPanel( {panelSwitching , userBookings=[], refreshBookings}) {
 
    
   return (
@@ -29,7 +29,7 @@ export default function BookingPanel( {panelSwitching , userBookings=[]}) {
           {/* 3. Scrolling Layer Core: Only this block scrolls if elements multiply */}
           <div className="flex-1 overflow-y-auto py-4 my-2 pr-1 custom-scrollbar">
               {userBookings.map((element) => (
-                <BookingCard key={element._id} booking={element} />
+                <BookingCard key={element._id} booking={element}  onBookingUpdate={refreshBookings} />
               ))}
           </div>
           
