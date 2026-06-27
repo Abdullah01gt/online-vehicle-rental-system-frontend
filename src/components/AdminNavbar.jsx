@@ -60,7 +60,7 @@ export default function AdminNavbar() {
                         className="relative flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">
                     <i data-lucide="git-pull-request" className="w-4 h-4 text-amber-500 group-hover:scale-110 transition"></i>
                     <span>Users Info</span>
-                   { newApprovals.length > 0  ? <span className="bg-amber-500 text-black text-[10px] font-bold px-1.5 py-0.5 rounded-md shadow-sm">{newApprovals.length} New</span> : <div></div>}
+                   
                 </button>
                 <button onClick={() => navigate("/vehicleapproval")}
                         className="relative flex items-center space-x-2 bg-[#1a1d26] hover:bg-[#222632] border border-gray-800 hover:border-gray-700 px-4 py-2.5 rounded-xl text-xs font-semibold transition duration-200 text-gray-200 group">

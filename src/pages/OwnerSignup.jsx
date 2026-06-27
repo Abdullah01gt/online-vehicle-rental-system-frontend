@@ -83,7 +83,7 @@ export default function Signup() {
 
             if (response.ok) {
                 login(result.data, result.token);
-                navigate("/");
+                navigate("/owner");
             } else {
                 setValuesUpdation(true);
             }

@@ -162,7 +162,7 @@ export default function OwnerLogin() {
             </form>
 
               <p className="text-center text-sm text-gray-400 mt-8">
-                New Here? Register by <t />
+                New Owner? Register by <t />
                
                 <Link to="/ownersignup"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
                 clicking here

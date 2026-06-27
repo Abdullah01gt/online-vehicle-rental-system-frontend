@@ -68,9 +68,12 @@ export default function VehicleMaintainingCard({ cars = {} }) {
                 <span>Phone Number: {cars.owner_contact_number}</span>
               </div>
             </div>
+             
 
             <div className="bg-[#1a1d26] border border-gray-800/60 rounded-xl p-3 flex justify-between items-center">
               <span className="text-xs text-gray-400 font-medium">Platform Status</span>
+
+             
              
               <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
                 status 
