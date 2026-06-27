@@ -185,7 +185,10 @@ export default function BookingCard({ booking = {}, onBookingUpdate}) {
       <p className="text-xs text-gray-400">Booked On: {displayStartDate}</p>
       <p className="text-xs text-gray-400">Returned On: {displayEndDate}</p>
       <p className="text-xs text-gray-400">Booked for {booking.total_days} days</p>
+      <p className="text-xs text-gray-400">Owner Name : {booking.owner_name} </p>
+      <p className="text-xs text-gray-400">Owner's Phone Number: {booking.owner_contact_number}</p>
       <p className="text-xs text-amber-500 font-medium">Total Cost: ₹{booking.total_rent_cost}</p>
+      
        {resCancelled && <p className='text-xs text-red-400'> Cancelleation accepted, Refund will be intitated soon (May take 3-5 business days).</p>}
 
       <div className="flex gap-2 mt-2">

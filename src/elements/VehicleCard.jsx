@@ -232,7 +232,10 @@ export default function VehicleCard({ cars = {}, currentUser = {},refreshBooking
                             <span className="text-[11px] uppercase tracking-widest font-bold text-amber-500">{cars.brand_name}</span>
                             <h3 className="text-xl font-bold text-white tracking-tight"> {cars.model_name}</h3>
                             <h4 className="text-sm font-light text-gray-300 tracking-tight">Registration Number: {cars.registration_number}</h4>
+                            <h4 className="text-sm font-light text-gray-300 tracking-tight">Owner Name: {cars.owner_name}</h4>
+                            <h4 className="text-sm font-light text-gray-300 tracking-tight">Phone Number:{cars.owner_contact_number}</h4>
                             <h4 className="text-sm font-light text-gray-300 tracking-tight">📍{cars.available_region}</h4>
+                            
                         </div>
                         <span className="text-xs bg-gray-800/50 text-gray-400 px-2 py-1 rounded-md font-medium">{cars.model_year}</span>
                     </div>
