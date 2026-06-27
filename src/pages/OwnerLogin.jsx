@@ -36,7 +36,7 @@ export default function OwnerLogin() {
      );
      const return_data = await response.json();
      if(return_data.data.length > 0){
-       console.log(return_data)
+      
        return return_data
      } 
      else{
