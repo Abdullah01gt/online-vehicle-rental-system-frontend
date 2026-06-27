@@ -36,7 +36,7 @@ export default function OwnerLogin() {
      );
      const return_data = await response.json();
      if(return_data.data.length > 0){
-      
+       console.log(return_data)
        return return_data
      } 
      else{
@@ -57,6 +57,7 @@ export default function OwnerLogin() {
       }
 
       const validation = await checkValidation(credentials)
+      console.log(validation)
       if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "owner"){
         
         
