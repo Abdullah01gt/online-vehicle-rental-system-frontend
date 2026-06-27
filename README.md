@@ -17,18 +17,40 @@ A/C and basic infotainment systems.
 - View their past Transactions
 - Change their Profiles
 - View, Cancel or Modify Bookings
+- Sample users:
+  - user 1: 
+   email: suresh@gmail.com
+   password: suresh123
+
+  - user 2:
+    email: pandi@gmail.com
+    password: pandi123
+
+
 
 ### 2. Vehicle Owners
 
 - Can registers vehicles Their vehicles for renting
 - View who booked thier vehicles
 - Can Make their vehicles available or unavailable for bookings
+-  Sample Owners:
+  - owner 1:
+    email: ramesh@gmail.com
+    password: ramesh123
+
+  - owner 2:
+    email  : mukilan123@gmail.com
+    password: mukilan123
 
 ### 3. Admins
 
 - Can Monitor bookings and payments
 - Can approve New Vehicles available for rentals
 - Manage All The user profiles
+- Sample Admin
+   -admin
+    email: admin@qd.com
+    password: admin123
 
 ## Tech Stacks Used
 
