@@ -51,7 +51,7 @@ export default function AdminLogin() {
    async function handleSubmit(e){
     e.preventDefault()
     setWrongCredentials(false)
-    console.log("Entered the validation")
+    
       const credentials ={
         email_address: emailAddress,
         password: password

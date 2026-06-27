@@ -60,7 +60,7 @@ export default function OwnerLogin() {
       console.log(validation)
       if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "owner"){
         
-        
+        login(validation.data[0], validation.token);
         navigate('/owner')
       }else{
         navigate("/ownerlogin");
