@@ -58,12 +58,24 @@ export default function Login() {
       }
 
       const validation = await checkValidation(credentials)
-      if(validation){
       
-        login(validation.data[0], validation.token);
+      if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "user"){
         
+        login(validation.data[0], validation.token);
         navigate('/')
-      }else{
+      }else if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "owner")
+        {
+        
+        login(validation.data[0], validation.token);
+        navigate('/owner')
+      } 
+      else if(validation && validation.data && validation.data.length > 0 && validation.data[0].user_role === "admin")
+        {
+        
+        login(validation.data[0], validation.token);
+        navigate('/admin')
+      }
+      else {
         navigate("/login");
         setWrongCredentials(true)
       }
@@ -171,20 +183,7 @@ export default function Login() {
                 </Link>
                 
             </p>
-             <p className="text-center text-sm text-gray-400 mt-8">
-                Login as an <t />
-                <Link to="/adminlogin"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                admin
-                </Link>
-                
-            </p>
-            <p className="text-center text-sm text-gray-400 mt-8">
-                Login as an <t />
-                <Link to="/ownerlogin"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
-                owner
-                </Link>
-                
-            </p>
+
         </div>
     </div>
 

@@ -202,6 +202,13 @@ export default function Signup() {
                     <p className="text-center text-sm text-gray-400 mt-6">
                         Already have an account? <Link className="text-amber-500 font-medium hover:text-amber-400 transition" to="/login">Sign in here</Link>
                     </p>
+                     <p className="text-center text-sm text-gray-400 mt-8">
+                New Owner? Register by <t />
+               
+                <Link to="/ownersignup"  className="text-amber-500 font-medium hover:text-amber-400 transition inline-flex items-center group">
+                clicking here
+                </Link>
+            </p>
                 </div>
             </div>
         </div>
