@@ -105,15 +105,15 @@ export default function Signup() {
                         <span className="text-xl font-bold tracking-wider text-white">QUICK DRIVE</span>
                     </div>
                     <div className="space-y-4 max-w-sm z-10">
-                        <h1 className="text-3xl font-bold text-white leading-tight">Your key to unparalleled journeys.</h1>
-                        <p className="text-gray-400 text-sm leading-relaxed">Create an account to unlock verified access to premium engineering fleet rentals.</p>
+                        <h1 className="text-3xl font-bold text-white leading-tight">Welcome to our Car Renting platform.</h1>
+                        <p className="text-gray-400 text-sm leading-relaxed">List your car for rent and keep 95% of the fee for each successful rental payout transaction cycle.</p>
                     </div>
                 </div>
 
              
                 <div className="w-full md:w-7/12 flex flex-col justify-center px-6 py-12 sm:px-12 lg:px-16 bg-[#12141c]">
                     <div className="mb-6">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Create Account</h2>
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Create Vehicle Owner Account</h2>
                         <p className="text-gray-400 text-sm mt-1">Fill out the credentials below to start reserving your fleet.</p>
                     </div>
 
