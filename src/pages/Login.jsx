@@ -13,6 +13,7 @@ export default function Login() {
   const navigate = useNavigate()
   const { login, setUserDetails, userDetails } = useAuth()
   const [wrongCredentials, setWrongCredentials] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
  
 
   function emailAddressChange(e){
@@ -25,7 +26,9 @@ export default function Login() {
 
   async function checkValidation(values){
    try
-   {  const response = await fetch(`${serverBaseUrl}/users/v1/user`,
+   {
+     setIsLoading(true);
+     const response = await fetch(`${serverBaseUrl}/users/v1/user`,
         { method: "POST" ,
           headers: {
             'Content-Type' : 'application/json '
@@ -45,11 +48,14 @@ export default function Login() {
      }
     } catch(error){
          console.log('Error:', error)
+     } finally {
+        setIsLoading(false);
      }
   }
   
    async function handleSubmit(e){
     e.preventDefault()
+    
     setWrongCredentials(false)
    
       const credentials ={
@@ -169,9 +175,22 @@ export default function Login() {
              
 
                 <button type="submit" 
-                        className="w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition duration-200 flex items-center justify-center space-x-2 group" onClick={handleSubmit}>
-                    <span>Sign In to Dashboard</span>
+                        className={`w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition duration-200 flex items-center justify-center space-x-2 group
+                        ${isLoading ? 'bg-amber-300 cursor-not-allowed' : 'bg-amber-500 hover:bg-amber-400'    } `} onClick={handleSubmit}>
+                   
                     <i data-lucide="arrow-right" className="w-4 h-4 transform group-hover:translate-x-1 transition duration-200"></i>
+                    {isLoading ? (
+            <>
+              {/* Tailwind animated SVG spinner */}
+              <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Verifying...
+            </>
+          ) : (
+            <span>Sign In to Dashboard</span>
+          )}
                 </button>
             </form>
 
