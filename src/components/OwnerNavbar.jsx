@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 
 export default function OwnerNavbar() {
     const navigate = useNavigate()
-    const { logout } = useAuth()
+    const { userDetails, logout } = useAuth()
     
   return (
     <div>
@@ -58,6 +58,9 @@ export default function OwnerNavbar() {
             <span className="leading-none">Logout</span>
             <p>⏻</p>
            </button>
+            <button className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-black font-bold text-xs" onClick={() => navigate("/profileupdate")}>
+                   {userDetails?.user_name ? userDetails.user_name.slice(0, 2).toUpperCase() : "UN"}
+                    </button>
             </div>
         </div>
     </nav>

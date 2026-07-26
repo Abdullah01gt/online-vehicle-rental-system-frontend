@@ -52,6 +52,12 @@ export default function ProfileUpdate() {
         return Object.keys(currentErrors).length === 0;
     }
 
+    function profileNavigation(currentProfile){
+        if(currentProfile == "user") navigate("/")
+        if(currentProfile == "owner") navigate("/owner")
+        if(currentProfile == "admin") navigate("/admin")
+    }
+
     async function handleUpdateSubmit(e) {
         e.preventDefault()
         if (!runValidation()) return;
@@ -65,7 +71,7 @@ export default function ProfileUpdate() {
                 driving_license_id: drivingLicenseId.trim().toUpperCase(),
                 date_of_birth: dateOfBirth,
                 address: address.trim(),
-                contact_number: contactNumber.trim()
+                contact_number: contactNumber
             }
 
             const response = await fetch(`${serverBaseUrl}/users/v1/update/${userDetails._id}`, {
@@ -79,7 +85,7 @@ export default function ProfileUpdate() {
                 alert("Profile changes applied successfully!")
                 // Refresh authentication context record wrapper token if needed
                 if(login) login(result.data, result.token || localStorage.getItem('token'))
-                navigate("/")
+                profileNavigation(userDetails.user_role)
             } else {
                 alert(result.message || "Failed processing updates.")
             }
@@ -142,7 +148,7 @@ export default function ProfileUpdate() {
                     </div>
 
                     <div className="flex gap-4 pt-2">
-                        <button type="button" onClick={() => navigate("/")} className="w-1/3 border border-gray-800 hover:bg-gray-800 text-gray-300 py-3 rounded-xl transition text-xs font-bold uppercase tracking-wider">
+                        <button type="button" onClick={() => profileNavigation(userDetails.user_role)} className="w-1/3 border border-gray-800 hover:bg-gray-800 text-gray-300 py-3 rounded-xl transition text-xs font-bold uppercase tracking-wider">
                             Cancel
                         </button>
                         <button type="submit" disabled={isUpdating} className="w-2/3 bg-amber-500 hover:bg-amber-400 text-black py-3 rounded-xl transition text-xs font-bold uppercase tracking-wider">

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Search } from 'lucide-react';
 const serverBaseUrl = import.meta.env.VITE_SERVER_URL
 
-export default function SearchBar({ setVehicleList }) {
+export default function SearchBar({ setVehicles }) {
   const [textInput, setTextInput] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
@@ -24,7 +24,7 @@ export default function SearchBar({ setVehicleList }) {
 
       if (response.ok && result.success) {
         // Overwrite the home vehicle matrix state list with our filtered search arrays!
-        setVehicleList(result.data);
+        setVehicles(result.data);
       }
     } catch (error) {
       console.error("Search fetch loop failed:", error);

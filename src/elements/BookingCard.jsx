@@ -10,7 +10,8 @@ export default function BookingCard({ booking = {}, onBookingUpdate}) {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [reviewSubmitted, setReviewSubmitted] = useState(false);
-  let resCancelled = false;
+  const [resCancelled, setResCancelled] = useState(false);
+  let cancelledRes = false
 
   if (!booking.booking_start || !booking.booking_end) {
     return <div className="text-gray-500 text-xs">Loading booking data...</div>;
@@ -102,11 +103,33 @@ export default function BookingCard({ booking = {}, onBookingUpdate}) {
   const endDate = new Date(booking.booking_end);
   const isUpcoming = booking.booking_status === "booked" && today < startDate && !isCancelledSuccessfully;
 
+  async function updateBookingStatus(){
+     if (booking.booking_status === "booked" && today > endDate) {
+       try { 
+      const response = await fetch(`${serverBaseUrl}/bookings/v1/update/${booking._id}`, {
+        method: "PATCH",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ booking_status: "cancelled" })
+      });
+      if (response.ok) {
+        console.log("updated Successfully")
+        }
+    } catch (error) { console.log(error); }
+     
+    };
+  }
+
+  updateBookingStatus()
+
   const getBookingStatus = () => {
     if (booking.booking_status === "cancelled") { 
-      resCancelled = true
+      cancelledRes = true
       return "Cancelled"};
-    if (booking.booking_status === "booked" && today > endDate) return "Completed";
+    if (booking.booking_status === "booked" && today > endDate) {
+      
+      return "Completed"
+    };
+    if (booking.booking_status === "completed") return "Completed"
     if (booking.booking_status === "booked" && today < endDate) return "Upcoming";
     return "Unknown";
   };
@@ -125,7 +148,10 @@ export default function BookingCard({ booking = {}, onBookingUpdate}) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ booking_status: "cancelled" })
       });
-      if (response.ok) setIsCancelledSuccessfully(true);
+      if (response.ok) {
+        setIsCancelledSuccessfully(true);
+        setResCancelled(true)
+        }
     } catch (error) { console.log(error); }
   }
 
@@ -189,12 +215,13 @@ export default function BookingCard({ booking = {}, onBookingUpdate}) {
       <p className="text-xs text-gray-400">Owner's Phone Number: {booking.owner_contact_number}</p>
       <p className="text-xs text-amber-500 font-medium">Total Cost: ₹{booking.total_rent_cost}</p>
       
-       {resCancelled && <p className='text-xs text-red-400'> Cancelleation accepted, Refund will be intitated soon (May take 3-5 business days).</p>}
+       {(resCancelled || cancelledRes  ) && <p className='text-xs text-red-400'> Cancelleation accepted, Refund will be intitated soon (May take 3-5 business days).</p>}
 
       <div className="flex gap-2 mt-2">
-        <button onClick={handleInvoice} className="flex-1 py-2 rounded-xl border border-green-900/40 bg-green-950/10 hover:bg-green-950/30 text-green-400 text-xs font-bold uppercase tracking-wider transition duration-200">
+
+     {  !(resCancelled || cancelledRes  ) &&  <button onClick={handleInvoice} className="flex-1 py-2 rounded-xl border border-green-900/40 bg-green-950/10 hover:bg-green-950/30 text-green-400 text-xs font-bold uppercase tracking-wider transition duration-200">
           Get Invoice
-        </button>
+        </button> }
 
        
         {showReviewButton && (

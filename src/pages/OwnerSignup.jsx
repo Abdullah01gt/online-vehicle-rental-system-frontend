@@ -46,13 +46,21 @@ export default function Signup() {
         if (!gender) currentErrors.gender = "Gender selection is required";
 
         if (!drivingLicenseId.trim()) currentErrors.drivingLicenseId = "Driving License ID is missing";
-        else if (!validateDL(drivingLicenseId)) currentErrors.drivingLicenseId = "Format must match: TN65 1234567890 (2 letters, 2 digits, 10 digits)";
+        else if (!validateDL(drivingLicenseId)) currentErrors.drivingLicenseId = "Format must match: TN651234567890 (2 letters, 12 digits)";
 
         if (!address.trim()) currentErrors.address = "Residential address is missing";
 
         setErrors(currentErrors);
         return Object.keys(currentErrors).length === 0;
     }
+
+     const getTodayDateString = () => {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    };
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -156,7 +164,7 @@ export default function Signup() {
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Date of Birth</label>
                                 <input type="date" className="w-full px-4 py-2.5 bg-[#1a1d26] border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-amber-500 transition duration-200" 
-                                       value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}/>
+                                       value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)}  max={getTodayDateString()} onKeyDown={(e) => e.preventDefault()} />
                                 {errors.dateOfBirth && <p className="text-red-400 text-xs mt-0.5">{errors.dateOfBirth}</p>}
                             </div>
 
