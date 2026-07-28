@@ -17,6 +17,8 @@ import AdminVehicleRentalHistory from './pages/AdminVehicleRentalHistory.jsx'
 import PaymentRecords from './pages/PaymentRecords.jsx'
 import ProfileUpdate from './pages/ProfileUpdation.jsx'
 import UsersInfo from './pages/UsersInfo.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +33,8 @@ function App() {
           <Route path="/adminlogin" element={<AdminLogin />} />
            <Route path="/ownerlogin" element={<OwnerLogin />} />
               <Route path="/ownersignup" element={<OwnerSignup />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
         <Routes>
           <Route path="/" element={

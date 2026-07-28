@@ -152,10 +152,20 @@ export default function Login() {
                 </div>
 
                 <div className="space-y-2">
+                  
                     <div className="flex justify-between items-center">
                         <label htmlFor="password" className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Password</label>
-                       
+                         <p className="text-center text-sm text-gray-400 ">
+                
+               
+                <Link to="/forgotpassword"  className="text-amber-500 font-medium hover:text-amber-400 transition ">
+                Forgot Password?
+                </Link>
+                
+            </p>
                     </div>
+                    
+           
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500">
                             <i data-lucide="lock" className="w-5 h-5"></i>
@@ -193,6 +203,8 @@ export default function Login() {
           )}
                 </button>
             </form>
+
+            
 
             <p className="text-center text-sm text-gray-400 mt-8">
                 Don't have an account? 
