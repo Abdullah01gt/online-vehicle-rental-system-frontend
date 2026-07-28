@@ -85,6 +85,8 @@ export default function VehicleRegistration() {
                 body: formData
             });
 
+           
+
             if (response.ok) {
                 alert("Registration successful! Pending administrative verification clearance.");
                 navigate("/owner")
